@@ -1,0 +1,25 @@
+# torch / CUDA 由基础镜像提供，不要在这里安装 CPU 版 torch。
+fairseq==0.12.2
+omegaconf==2.0.6
+hydra-core==1.0.7
+gradio==3.48.0
+jinja2==3.1.4
+fastapi==0.104.1
+starlette==0.27.0
+uvicorn==0.24.0
+pydantic==2.5.3
+huggingface-hub==0.20.3
+faiss-cpu==1.8.0
+pyworld==0.3.4
+praat-parselmouth==0.4.3
+librosa==0.10.2
+soundfile==0.12.1
+scikit-learn==1.5.2
+numpy>=1.23,<2
+scipy>=1.10
+ffmpeg-python==0.2.0
+av==17.1.0
+tensorboard==2.18.0
+matplotlib==3.9.2
+tqdm
+numba

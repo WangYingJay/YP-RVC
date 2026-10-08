@@ -1,0 +1,677 @@
+/* ==========================================================================
+   YP-RVC Professional Studio UI Theme
+   Refined Visual Hierarchy, Custom SVG Icons, Distinct Form Controls
+   ========================================================================== */
+
+:root {
+  --yp-primary: #1e293b;
+  --yp-primary-hover: #334155;
+  --yp-accent: #2563eb;
+  --yp-accent-hover: #1d4ed8;
+  --yp-accent-soft: #eff6ff;
+  --yp-accent-border: #bfdbfe;
+  --yp-bg: #f8fafc;
+  --yp-card-bg: #ffffff;
+  --yp-border: #e2e8f0;
+  --yp-border-medium: #cbd5e1;
+  --yp-text-title: #0f172a;
+  --yp-text-body: #1e293b;
+  --yp-text-muted: #64748b;
+  --yp-text-subtle: #94a3b8;
+  --yp-shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+  --yp-shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.07), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+  --yp-radius: 12px;
+}
+
+.gradio-container,
+.gradio-container.dark {
+  max-width: 1180px !important;
+  margin: 0 auto !important;
+  padding: 24px 28px 60px !important;
+  background: var(--yp-bg) !important;
+  color: var(--yp-text-body) !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+.gradio-container .prose,
+.gradio-container .markdown,
+.gradio-container label,
+.gradio-container button,
+.gradio-container input,
+.gradio-container textarea {
+  font-family: inherit !important;
+}
+
+footer,
+.gradio-container .footer {
+  display: none !important;
+}
+
+/* ==========================================================================
+   Header & Brand Area
+   ========================================================================== */
+
+.yp-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 10px 4px 18px;
+  margin-bottom: 14px;
+  border-bottom: 1px solid var(--yp-border);
+}
+
+.yp-brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.yp-brand-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.yp-head h1 {
+  margin: 0;
+  font-size: 20px;
+  line-height: 1.3;
+  font-weight: 750;
+  color: var(--yp-text-title);
+  letter-spacing: -0.02em;
+}
+
+.yp-brand-badge {
+  font-size: 11px;
+  font-weight: 650;
+  color: #2563eb;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  padding: 2px 8px;
+  border-radius: 999px;
+  letter-spacing: 0.02em;
+}
+
+.yp-head-sub {
+  margin: 4px 0 0 !important;
+  font-size: 12.5px !important;
+  line-height: 1.5 !important;
+  color: var(--yp-text-muted) !important;
+  font-weight: 400 !important;
+}
+
+.yp-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  max-width: 460px;
+  padding: 7px 14px;
+  border: 1px solid var(--yp-border);
+  border-radius: 999px;
+  background: var(--yp-card-bg);
+  box-shadow: var(--yp-shadow-sm);
+  font-size: 12px;
+  color: var(--yp-text-muted);
+  flex-shrink: 0;
+}
+
+.yp-status-icon {
+  display: flex;
+  align-items: center;
+  color: #10b981;
+  flex-shrink: 0;
+}
+
+.yp-status-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 500;
+}
+
+/* ==========================================================================
+   Disclaimer Card (免责声明：降低视觉噪音，保持严谨与轻盈)
+   ========================================================================== */
+
+.yp-disclaimer-card {
+  margin-bottom: 20px;
+  background: #f8fafc;
+  border: 1px solid var(--yp-border);
+  border-left: 3.5px solid #f59e0b;
+  border-radius: 10px;
+  padding: 12px 16px;
+  box-shadow: var(--yp-shadow-sm);
+}
+
+.yp-disclaimer-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.yp-disclaimer-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.yp-disclaimer-icon {
+  display: flex;
+  align-items: center;
+  color: #d97706;
+}
+
+.yp-disclaimer-badge {
+  font-size: 12px;
+  font-weight: 700;
+  color: #b45309;
+}
+
+.yp-disclaimer-sub {
+  font-size: 11px;
+  color: var(--yp-text-subtle);
+  font-weight: 400;
+}
+
+.yp-disclaimer-link {
+  font-size: 11px;
+  font-weight: 600;
+  color: #b45309;
+  text-decoration: underline;
+  padding: 1px 6px;
+  border-radius: 4px;
+  background: #fef3c7;
+}
+
+.yp-disclaimer-content {
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+  color: var(--yp-text-muted) !important;
+  font-weight: 400 !important;
+}
+
+.yp-disclaimer-content code {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1px 5px;
+  font-size: 11.5px;
+  font-family: monospace;
+  color: var(--yp-text-body);
+}
+
+/* ==========================================================================
+   Card & Section Steps (彻底修复 step badge 黑色块问题)
+   ========================================================================== */
+
+.yp-card,
+.gr-box.yp-card {
+  background: var(--yp-card-bg) !important;
+  border: 1px solid var(--yp-border) !important;
+  border-radius: var(--yp-radius) !important;
+  box-shadow: var(--yp-shadow-sm) !important;
+  padding: 16px 20px 20px !important;
+  margin-bottom: 18px !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.yp-card:hover {
+  border-color: var(--yp-border-medium) !important;
+  box-shadow: var(--yp-shadow-md) !important;
+}
+
+.yp-step-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed var(--yp-border);
+}
+
+/* 步骤数字徽章：柔和协调的微蓝底色与精致边框，拒绝突兀刺眼 */
+.yp-step-badge {
+  width: 24px !important;
+  height: 24px !important;
+  border-radius: 6px !important;
+  background: #eff6ff !important;
+  border: 1.5px solid #bfdbfe !important;
+  box-shadow: none !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex: none !important;
+}
+
+.yp-step-badge,
+.yp-step-badge span {
+  color: #2563eb !important;
+  font-size: 13px !important;
+  font-weight: 750 !important;
+  line-height: 1 !important;
+  text-shadow: none !important;
+}
+
+.yp-step-title-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.yp-step-title-line {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.yp-step-icon {
+  display: flex;
+  align-items: center;
+  color: #2563eb;
+  flex-shrink: 0;
+}
+
+.yp-step-title {
+  font-size: 15px !important;
+  font-weight: 750 !important;
+  color: var(--yp-text-title) !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* 弱化步骤说明文本，拉开视觉权重 */
+.yp-step-desc {
+  font-size: 12px !important;
+  font-weight: 400 !important;
+  color: var(--yp-text-muted) !important;
+  line-height: 1.45 !important;
+}
+
+/* ==========================================================================
+   弱化表单说明文本 (Info 文本减重，强化主 Label)
+   ========================================================================== */
+
+/* 主 Label 保持清晰有力 */
+.gr-form label,
+label.svelte-1b6s6s,
+.gr-box label,
+span.svelte-1gfkn6j {
+  font-size: 13px !important;
+  font-weight: 650 !important;
+  color: var(--yp-text-title) !important;
+  letter-spacing: 0.01em !important;
+}
+
+/* 说明 info 文本明显弱化，不再喧宾夺主 */
+div.svelte-e8n7p6,
+.block-info,
+.has-info,
+span.has-info.svelte-1gfkn6j {
+  font-size: 11.5px !important;
+  font-weight: 400 !important;
+  color: var(--yp-text-muted) !important;
+  line-height: 1.4 !important;
+  margin-top: 2px !important;
+  margin-bottom: 6px !important;
+}
+
+/* ==========================================================================
+   单选框 (Radio) 深度优化：彻底解决“未勾选看不清”
+   ========================================================================== */
+
+.gr-radio {
+  display: flex;
+  flex-direction: column;
+}
+
+.gr-radio .wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px !important;
+  margin-top: 2px !important;
+}
+
+/* 未选中的 Label 选项条：具备清爽背景与明显边界 */
+.gr-radio label,
+.gr-check-radio label,
+label.svelte-vm32wk {
+  border-radius: 8px !important;
+  border: 1.5px solid var(--yp-border-medium) !important;
+  background: #ffffff !important;
+  color: #334155 !important;
+  padding: 6px 14px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  cursor: pointer !important;
+  transition: all 0.15s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  user-select: none !important;
+}
+
+/* 未选中 Hover 态 */
+.gr-radio label:hover,
+label.svelte-vm32wk:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  color: #0f172a !important;
+}
+
+/* 核心优化：选中后的 Label 选项条（告别大黑块反差，改用温润浅蓝与品牌蓝边框） */
+.gr-radio label.selected,
+.gr-check-radio label.selected,
+label.selected.svelte-vm32wk {
+  background: #eff6ff !important;
+  border-color: #3b82f6 !important;
+  box-shadow: 0 1px 2px rgba(37, 99, 235, 0.08) !important;
+}
+
+/* 选中项 Hover 态保持清爽蓝调 */
+.gr-radio label.selected:hover,
+.gr-check-radio label.selected:hover,
+label.selected.svelte-vm32wk:hover {
+  background: #dbeafe !important;
+  border-color: #2563eb !important;
+}
+
+.gr-radio label.selected,
+.gr-radio label.selected span,
+.gr-check-radio label.selected,
+.gr-check-radio label.selected span,
+label.selected.svelte-vm32wk,
+label.selected.svelte-vm32wk span {
+  color: #1d4ed8 !important;
+  font-weight: 650 !important;
+}
+
+/* 未选中的单选圆圈 */
+.gr-radio input[type="radio"],
+input[type="radio"].svelte-vm32wk {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  width: 15px !important;
+  height: 15px !important;
+  border-radius: 50% !important;
+  border: 1.5px solid #94a3b8 !important;
+  background-color: #ffffff !important;
+  margin: 0 7px 0 0 !important;
+  position: relative !important;
+  display: inline-grid !important;
+  place-content: center !important;
+  cursor: pointer !important;
+  flex-shrink: 0 !important;
+  transition: all 0.15s ease !important;
+}
+
+/* 未选中 Hover 时圆圈边框加深 */
+.gr-radio label:hover input[type="radio"],
+label.svelte-vm32wk:hover input[type="radio"] {
+  border-color: #64748b !important;
+}
+
+/* 选中态时的圆圈外框与中心圆点：协调一致的柔和蓝 */
+.gr-radio label.selected input[type="radio"],
+label.selected.svelte-vm32wk input[type="radio"] {
+  border-color: #2563eb !important;
+  background-color: #ffffff !important;
+}
+
+.gr-radio label.selected input[type="radio"]::before,
+label.selected.svelte-vm32wk input[type="radio"]::before {
+  content: "" !important;
+  width: 7px !important;
+  height: 7px !important;
+  border-radius: 50% !important;
+  background-color: #2563eb !important;
+}
+
+/* ==========================================================================
+   输入框与文本域
+   ========================================================================== */
+
+input[type="text"],
+input[type="number"],
+textarea,
+.gr-box input,
+.gr-box textarea {
+  border-radius: 8px !important;
+  border: 1px solid var(--yp-border) !important;
+  background: #ffffff !important;
+  color: var(--yp-text-body) !important;
+  font-size: 13px !important;
+  padding: 8px 12px !important;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+input:focus,
+textarea:focus {
+  border-color: #64748b !important;
+  box-shadow: 0 0 0 2px rgba(100, 116, 139, 0.15) !important;
+  outline: none !important;
+}
+
+textarea {
+  background: #f8fafc !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace !important;
+  font-size: 12px !important;
+  line-height: 1.55 !important;
+}
+
+input[type="range"] {
+  accent-color: #2563eb !important;
+}
+
+/* ==========================================================================
+   动作按钮与 SVG 矢量图标注入 (全面替代 emoji)
+   ========================================================================== */
+
+button.primary,
+.gr-button-primary,
+.yp-action-btn {
+  background: #1e293b !important;
+  border: 1px solid #1e293b !important;
+  color: #f8fafc !important;
+  border-radius: 8px !important;
+  font-weight: 600 !important;
+  font-size: 13.5px !important;
+  padding: 8px 16px !important;
+  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.1) !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+button.primary:hover,
+.gr-button-primary:hover,
+.yp-action-btn:hover {
+  background: #334155 !important;
+  border-color: #334155 !important;
+  box-shadow: 0 2px 4px rgba(15, 23, 42, 0.15) !important;
+  transform: translateY(-1px);
+}
+
+.yp-primary-accent-btn {
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%) !important;
+  border: 1px solid #0f172a !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.22) !important;
+}
+
+.yp-primary-accent-btn:hover {
+  background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%) !important;
+  border-color: #1d4ed8 !important;
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.35) !important;
+  transform: translateY(-1px);
+}
+
+/* SVG 图标：通用伪元素基础 */
+.yp-btn-preprocess::before,
+.yp-btn-extract::before,
+.yp-btn-train::before,
+.yp-btn-index::before,
+.yp-btn-train-all::before,
+.yp-btn-pause::before,
+.yp-btn-resume::before,
+.yp-btn-stop::before,
+.yp-btn-clear::before,
+.yp-btn-download::before {
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  margin-right: 7px;
+  background-color: currentColor;
+  flex-shrink: 0;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+}
+
+/* 1. 处理数据 (Audio Cut/Waveform SVG) */
+.yp-btn-preprocess::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 10v4'/%3E%3Cpath d='M7 6v12'/%3E%3Cpath d='M11 3v18'/%3E%3Cpath d='M15 8v8'/%3E%3Cpath d='M19 11v2'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 10v4'/%3E%3Cpath d='M7 6v12'/%3E%3Cpath d='M11 3v18'/%3E%3Cpath d='M15 8v8'/%3E%3Cpath d='M19 11v2'/%3E%3C/svg%3E");
+}
+
+/* 2. 特征提取 (Neural Vector Extraction SVG) */
+.yp-btn-extract::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='12' r='3'/%3E%3Cline x1='8.5' y1='7.5' x2='15.5' y2='10.5'/%3E%3Cline x1='8.5' y1='16.5' x2='15.5' y2='13.5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='6' cy='6' r='3'/%3E%3Ccircle cx='6' cy='18' r='3'/%3E%3Ccircle cx='18' cy='12' r='3'/%3E%3Cline x1='8.5' y1='7.5' x2='15.5' y2='10.5'/%3E%3Cline x1='8.5' y1='16.5' x2='15.5' y2='13.5'/%3E%3C/svg%3E");
+}
+
+/* 3. 训练模型 (Flame / AI Model Training SVG) */
+.yp-btn-train::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z'/%3E%3C/svg%3E");
+}
+
+/* 4. 训练特征索引 (Vector Database Index Search SVG) */
+.yp-btn-index::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3Cline x1='11' y1='8' x2='11' y2='14'/%3E%3Cline x1='8' y1='11' x2='14' y2='11'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3Cline x1='11' y1='8' x2='11' y2='14'/%3E%3Cline x1='8' y1='11' x2='14' y2='11'/%3E%3C/svg%3E");
+}
+
+button.yp-ctrl-btn {
+  background: #ffffff !important;
+  color: #1e293b !important;
+  border: 1px solid #cbd5e1 !important;
+  box-shadow: none !important;
+}
+
+button.yp-ctrl-btn:hover {
+  background: #f8fafc !important;
+  border-color: #94a3b8 !important;
+  transform: translateY(-1px);
+}
+
+button.yp-btn-stop {
+  color: #b91c1c !important;
+  border-color: #fecaca !important;
+}
+
+button.yp-btn-stop:hover {
+  background: #fef2f2 !important;
+  border-color: #f87171 !important;
+}
+
+.yp-btn-pause::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='6' y='5' width='4' height='14' rx='1'/%3E%3Crect x='14' y='5' width='4' height='14' rx='1'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='6' y='5' width='4' height='14' rx='1'/%3E%3Crect x='14' y='5' width='4' height='14' rx='1'/%3E%3C/svg%3E");
+}
+
+.yp-btn-resume::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpolygon points='8,5 19,12 8,19'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpolygon points='8,5 19,12 8,19'/%3E%3C/svg%3E");
+}
+
+.yp-btn-stop::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='6' y='6' width='12' height='12' rx='1.5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Crect x='6' y='6' width='12' height='12' rx='1.5'/%3E%3C/svg%3E");
+}
+
+button.yp-btn-clear {
+  color: #b91c1c !important;
+  border-color: #fecaca !important;
+}
+
+button.yp-btn-clear:hover {
+  background: #fef2f2 !important;
+  border-color: #f87171 !important;
+}
+
+.yp-btn-clear::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M8 6V4h8v2'/%3E%3Cpath d='M19 6l-1 14H6L5 6'/%3E%3Cpath d='M10 11v6'/%3E%3Cpath d='M14 11v6'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 6h18'/%3E%3Cpath d='M8 6V4h8v2'/%3E%3Cpath d='M19 6l-1 14H6L5 6'/%3E%3Cpath d='M10 11v6'/%3E%3Cpath d='M14 11v6'/%3E%3C/svg%3E");
+}
+
+.yp-btn-download::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 21h14'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M12 3v12'/%3E%3Cpath d='m7 10 5 5 5-5'/%3E%3Cpath d='M5 21h14'/%3E%3C/svg%3E");
+}
+
+.yp-download-head {
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 650;
+  color: var(--yp-text-title);
+}
+
+#dataset-upload,
+#dataset-upload .prose,
+#dataset-upload iframe,
+.yp-upload-frame {
+  width: 100% !important;
+  height: 176px !important;
+  min-height: 176px !important;
+  border: 0 !important;
+  border-radius: 8px !important;
+  background: #fff !important;
+}
+
+#refresh-audio-dir {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  clip-path: inset(50%) !important;
+  white-space: nowrap !important;
+}
+
+/* 5. 一键训练 (Rocket Launcher Flight SVG) */
+.yp-btn-train-all::before {
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z'/%3E%3Cpath d='m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z'/%3E%3Cpath d='M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0'/%3E%3Cpath d='M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   响应式调整
+   ========================================================================== */
+
+@media (max-width: 860px) {
+  .yp-head {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+
+  .yp-status {
+    max-width: none;
+  }
+
+  .gradio-container {
+    padding: 16px 14px 40px !important;
+  }
+}

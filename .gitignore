@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+*.pt
+*.pth
+*.index
+logs/mute/
+datasets/*
+!datasets/.gitkeep
+open_train.py
+打开训练页.py
+打开训练页.bat
