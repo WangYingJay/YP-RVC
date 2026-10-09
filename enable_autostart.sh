@@ -31,17 +31,34 @@ if [ -z "$PY" ] && [ -f "$ROOT/cloud-start.sh" ]; then
   PY="$(awk '/^exec / {print $2; exit}' "$ROOT/cloud-start.sh" || true)"
 fi
 if [ -z "$PY" ] || [ ! -x "$PY" ]; then
-  if [ -x /root/miniconda3/envs/yprvc/bin/python ]; then
+  if [ -x /usr/local/miniconda3/envs/yprvc/bin/python ]; then
+    PY="/usr/local/miniconda3/envs/yprvc/bin/python"
+  elif [ -x /root/miniconda3/envs/yprvc/bin/python ]; then
     PY="/root/miniconda3/envs/yprvc/bin/python"
-  elif [ -f /root/miniconda3/etc/profile.d/conda.sh ]; then
-    # shellcheck disable=SC1091
-    source /root/miniconda3/etc/profile.d/conda.sh
-    if conda env list | awk '{print $1}' | grep -qx yprvc; then
-      conda activate yprvc || true
-    fi
-    PY="$(command -v python || true)"
   else
-    PY="$(command -v python || true)"
+    CONDA_SH=""
+    for candidate in \
+      /usr/local/miniconda3/etc/profile.d/conda.sh \
+      /root/miniconda3/etc/profile.d/conda.sh \
+      /opt/conda/etc/profile.d/conda.sh
+    do
+      if [ -f "$candidate" ]; then
+        CONDA_SH="$candidate"
+        break
+      fi
+    done
+    if [ -n "$CONDA_SH" ]; then
+      # shellcheck disable=SC1090
+      source "$CONDA_SH"
+      CONDA_ROOT="$(cd "$(dirname "$CONDA_SH")/../.." && pwd)"
+      if [ -x "$CONDA_ROOT/envs/yprvc/bin/python" ]; then
+        PY="$CONDA_ROOT/envs/yprvc/bin/python"
+      else
+        PY="$(command -v python || true)"
+      fi
+    else
+      PY="$(command -v python || true)"
+    fi
   fi
 fi
 if [ -z "$PY" ] || [ ! -x "$PY" ]; then
@@ -84,6 +101,17 @@ PORT='${PORT}'
 LOG="\$ROOT/logs/boot.log"
 APPLOG="\$ROOT/logs/webui.log"
 mkdir -p "\$DATASET" "\$LOGDIR" "\$LOGDIR/weights" "\$ROOT/assets/weights" "\$ROOT/logs"
+
+refresh_train_link() {
+  export PORT="\$PORT"
+  export RVC_ROOT="\$ROOT"
+  if [ -f "\$ROOT/tools/refresh_train_link.py" ]; then
+    "\$PY" "\$ROOT/tools/refresh_train_link.py" >> "\$LOG" 2>&1 || \\
+      python3 "\$ROOT/tools/refresh_train_link.py" >> "\$LOG" 2>&1 || true
+  fi
+}
+
+refresh_train_link
 
 say() {
   local line
@@ -555,6 +583,26 @@ EOF
       grep -nE 'startup|start\.d|entrypoint|nvidia_|jupyter|bash |\.sh' "$boot_file" | head -n 30 || true
     fi
   fi
+fi
+
+echo "===== Jupyter 默认打开 quick_setup.ipynb ====="
+mkdir -p /root/.jupyter
+cat > /root/.jupyter/jupyter_server_config.py << 'EOF'
+c = get_config()
+c.ServerApp.root_dir = "/root"
+c.FileContentsManager.root_dir = "/root"
+c.LabApp.default_url = "/lab/tree/YP-RVC/quick_setup.ipynb"
+c.ServerApp.default_url = "/lab/tree/YP-RVC/quick_setup.ipynb"
+EOF
+echo "已写入 /root/.jupyter/jupyter_server_config.py"
+
+echo "===== 刷新训练页链接 ====="
+export PORT="$PORT"
+export RVC_ROOT="$ROOT"
+if [ -f "$ROOT/tools/refresh_train_link.py" ]; then
+  "$PY" "$ROOT/tools/refresh_train_link.py" || python3 "$ROOT/tools/refresh_train_link.py" || true
+else
+  echo "缺少 $ROOT/tools/refresh_train_link.py，请先上传该文件"
 fi
 
 echo "===== 现在启动训练页 ====="

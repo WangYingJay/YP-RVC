@@ -41,18 +41,29 @@ fi
 
 echo
 echo "-- Python --"
-if [ -f /root/miniconda3/etc/profile.d/conda.sh ]; then
-  # shellcheck disable=SC1091
-  source /root/miniconda3/etc/profile.d/conda.sh
-  if conda env list | awk '{print $1}' | grep -qx yprvc; then
-    conda activate yprvc
-    ok "使用 conda 环境 yprvc"
+CONDA_SH=""
+for candidate in \
+  /usr/local/miniconda3/etc/profile.d/conda.sh \
+  /root/miniconda3/etc/profile.d/conda.sh \
+  /opt/conda/etc/profile.d/conda.sh
+do
+  if [ -f "$candidate" ]; then
+    CONDA_SH="$candidate"
+    break
+  fi
+done
+if [ -n "$CONDA_SH" ]; then
+  # shellcheck disable=SC1090
+  source "$CONDA_SH"
+  CONDA_ROOT="$(cd "$(dirname "$CONDA_SH")/../.." && pwd)"
+  if [ -x "$CONDA_ROOT/envs/yprvc/bin/python" ]; then
+    export PATH="$CONDA_ROOT/envs/yprvc/bin:$PATH"
+    ok "使用 conda 环境 yprvc ($CONDA_ROOT/envs/yprvc/bin/python)"
   else
-    conda activate base
-    note "还没有 yprvc 环境，当前用的是 base"
+    note "还没有 yprvc 环境，当前用的是默认 python"
   fi
 else
-  note "未找到 /root/miniconda3，使用系统 python"
+  note "未找到 miniconda，使用系统 python"
 fi
 
 if ! command -v python >/dev/null 2>&1; then

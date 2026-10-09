@@ -17,33 +17,98 @@ ROOT="$BASE/YP-RVC"
 echo "===== YP-RVC 一键部署 ====="
 echo "脚本目录: $BASE"
 
-if [ -f /root/miniconda3/etc/profile.d/conda.sh ]; then
-  # shellcheck disable=SC1091
-  source /root/miniconda3/etc/profile.d/conda.sh
-  conda activate base
+CONDA_SH=""
+for candidate in \
+  /usr/local/miniconda3/etc/profile.d/conda.sh \
+  /root/miniconda3/etc/profile.d/conda.sh \
+  /opt/conda/etc/profile.d/conda.sh \
+  "$HOME/miniconda3/etc/profile.d/conda.sh"
+do
+  if [ -f "$candidate" ]; then
+    CONDA_SH="$candidate"
+    break
+  fi
+done
+if [ -z "$CONDA_SH" ] && command -v conda >/dev/null 2>&1; then
+  conda_base="$(conda info --base 2>/dev/null || true)"
+  if [ -n "$conda_base" ] && [ -f "$conda_base/etc/profile.d/conda.sh" ]; then
+    CONDA_SH="$conda_base/etc/profile.d/conda.sh"
+  fi
 fi
 
-ver="$(python -c 'import sys; print("%d.%d" % sys.version_info[:2])')"
-echo "当前 Python: $(command -v python) $ver"
+CONDA_ROOT=""
+if [ -n "$CONDA_SH" ]; then
+  # shellcheck disable=SC1090
+  source "$CONDA_SH"
+  CONDA_ROOT="$(cd "$(dirname "$CONDA_SH")/../.." && pwd)"
+  echo "已加载 conda: $CONDA_ROOT"
+fi
+
+use_yprvc_python() {
+  local py=""
+  if [ -n "$CONDA_ROOT" ] && [ -x "$CONDA_ROOT/envs/yprvc/bin/python" ]; then
+    py="$CONDA_ROOT/envs/yprvc/bin/python"
+  elif [ -x /usr/local/miniconda3/envs/yprvc/bin/python ]; then
+    py="/usr/local/miniconda3/envs/yprvc/bin/python"
+  elif [ -x /root/miniconda3/envs/yprvc/bin/python ]; then
+    py="/root/miniconda3/envs/yprvc/bin/python"
+  fi
+  if [ -n "$py" ]; then
+    export PATH="$(dirname "$py"):$PATH"
+    PY="$py"
+    return 0
+  fi
+  return 1
+}
+
+PY="$(command -v python || true)"
+ver="0.0"
+if [ -n "$PY" ]; then
+  ver="$("$PY" -c 'import sys; print("%d.%d" % sys.version_info[:2])')"
+fi
+echo "当前 Python: ${PY:-未找到} $ver"
 case "$ver" in
   3.10|3.11) ;;
   *)
-    echo "Python $ver 不适合编译 fairseq，正在创建 Python 3.11 环境 yprvc"
-    export CONDA_PLUGINS_AUTO_ACCEPT_TOS=yes
-    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main
-    conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r
-    if conda env list | awk '{print $1}' | grep -qx yprvc; then
+    echo "Python $ver 不适合编译 fairseq，正在准备 Python 3.11 环境 yprvc"
+    if use_yprvc_python; then
       echo "环境 yprvc 已存在，直接使用。"
     else
+      if [ -z "$CONDA_SH" ] || ! command -v conda >/dev/null 2>&1; then
+        echo "找不到 conda，无法创建 yprvc 环境。"
+        exit 1
+      fi
+      export CONDA_PLUGINS_AUTO_ACCEPT_TOS=yes
+      conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/main || true
+      conda tos accept --override-channels --channel https://repo.anaconda.com/pkgs/r || true
       conda create -y -n yprvc python=3.11
+      if ! use_yprvc_python; then
+        # shellcheck disable=SC1090
+        source "$CONDA_SH"
+        conda activate yprvc
+        PY="$(command -v python)"
+      fi
     fi
-    conda activate yprvc
     ;;
 esac
 
-PY="$(command -v python)"
+if [ -z "${PY:-}" ] || [ ! -x "$PY" ]; then
+  PY="$(command -v python || true)"
+fi
+if [ -z "$PY" ] || [ ! -x "$PY" ]; then
+  echo "找不到可用的 Python。"
+  exit 1
+fi
 echo "将使用: $PY"
 "$PY" -V
+ver="$("$PY" -c 'import sys; print("%d.%d" % sys.version_info[:2])')"
+case "$ver" in
+  3.10|3.11) ;;
+  *)
+    echo "最终 Python 仍是 $ver，需要 3.10 或 3.11。"
+    exit 1
+    ;;
+esac
 
 echo "===== 1/4 解压 ====="
 if [ -f "$ROOT/webui.py" ] && [ -f "$ROOT/assets/hubert/hubert_base.pt" ] && [ -f "$ROOT/assets/rmvpe/rmvpe.pt" ]; then
