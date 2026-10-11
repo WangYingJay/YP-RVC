@@ -1,4 +1,5 @@
 import os
+import shutil
 import sys
 import traceback
 from collections import OrderedDict
@@ -46,6 +47,10 @@ def savee(ckpt, sr, if_f0, name, epoch, version, hps):
         os.makedirs(weight_dir, exist_ok=True)
         weight_path = os.path.abspath(os.path.join(weight_dir, "%s.pth" % name))
         torch.save(opt, weight_path)
+        assets_dir = os.path.abspath(os.path.join(os.getcwd(), "assets", "weights"))
+        if os.path.normcase(assets_dir) != os.path.normcase(os.path.abspath(weight_dir)):
+            os.makedirs(assets_dir, exist_ok=True)
+            shutil.copy2(weight_path, os.path.join(assets_dir, "%s.pth" % name))
         return weight_path
     except:
         return traceback.format_exc()

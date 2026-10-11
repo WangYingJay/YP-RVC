@@ -631,14 +631,17 @@ button.yp-btn-clear:hover {
 #dataset-upload iframe,
 .yp-upload-frame {
   width: 100% !important;
-  height: 176px !important;
-  min-height: 176px !important;
+  height: 480px !important;
+  min-height: 480px !important;
   border: 0 !important;
   border-radius: 8px !important;
   background: #fff !important;
 }
 
-#refresh-audio-dir {
+#refresh-audio-dir,
+#btn-save-session,
+#btn-restore-session,
+.yp-hidden-session-btn {
   position: absolute !important;
   width: 1px !important;
   height: 1px !important;
@@ -648,6 +651,8 @@ button.yp-btn-clear:hover {
   clip: rect(0 0 0 0) !important;
   clip-path: inset(50%) !important;
   white-space: nowrap !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
 }
 
 /* 5. 一键训练 (Rocket Launcher Flight SVG) */

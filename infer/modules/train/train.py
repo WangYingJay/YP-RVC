@@ -1,6 +1,7 @@
 import os
 import sys
 import logging
+import shutil
 import warnings
 
 logger = logging.getLogger(__name__)
@@ -153,12 +154,13 @@ def save_training_state(rank, epoch, hps, net_g, net_d, optim_g, optim_d, logger
     if rank != 0:
         return
     step_tag = global_step if hps.if_latest == 0 else 2333333
+    g_path = os.path.join(hps.model_dir, "G_{}.pth".format(step_tag))
     utils.save_checkpoint(
         net_g,
         optim_g,
         hps.train.learning_rate,
         epoch,
-        os.path.join(hps.model_dir, "G_{}.pth".format(step_tag)),
+        g_path,
     )
     utils.save_checkpoint(
         net_d,
@@ -167,6 +169,16 @@ def save_training_state(rank, epoch, hps, net_g, net_d, optim_g, optim_d, logger
         epoch,
         os.path.join(hps.model_dir, "D_{}.pth".format(step_tag)),
     )
+    epoch_dir = os.path.join(hps.model_dir, "Epoch")
+    os.makedirs(epoch_dir, exist_ok=True)
+    epoch_copy = os.path.join(epoch_dir, "%s-%s.pth" % (hps.name, epoch))
+    try:
+        shutil.copy2(g_path, epoch_copy)
+        if logger is not None:
+            logger.info("Epoch copy saved to %s", epoch_copy)
+    except OSError as exc:
+        if logger is not None:
+            logger.warning("Failed to copy epoch checkpoint to %s: %s", epoch_copy, exc)
     infer_name = export_name
     if infer_name is None and str(hps.save_every_weights) == "1":
         infer_name = "%s_e%s_s%s" % (hps.name, epoch, global_step)
@@ -253,11 +265,19 @@ def report_epoch(hps, logger, epoch, end_epoch, elapsed):
         finish_text = finish.strftime("%H:%M")
     else:
         finish_text = finish.strftime("%m-%d %H:%M")
+    current_text = now.strftime("%m-%d %H:%M")
     report_progress(
         hps,
         logger,
-        "第 %s / %s 轮  本轮 %s  剩余 %s  预计 %s 结束"
-        % (epoch, end_epoch, format_duration(elapsed), format_duration(remaining), finish_text),
+        "第 %s / %s 轮  本轮 %s  剩余 %s  预计 %s 结束  当前 %s"
+        % (
+            epoch,
+            end_epoch,
+            format_duration(elapsed),
+            format_duration(remaining),
+            finish_text,
+            current_text,
+        ),
     )
 
 
